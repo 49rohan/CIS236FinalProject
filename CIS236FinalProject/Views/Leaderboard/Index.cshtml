@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Leaderboard";
+    var leaderboard = ViewData["Leaderboard"] as IEnumerable<dynamic>;
+}
+
+<h1>Leaderboard</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> Team Name</th>
+            <th> Total Attack</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var team in leaderboard)
+        {
+            <tr>
+                <td>@team.TeamName</td>
+                <td>@team.TotalAttack</td>
+            </tr>
+        }
+    </tbody>
+</table>
