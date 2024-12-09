@@ -4,21 +4,17 @@ namespace CIS236FinalProject.Models
 {
     public class GameDBContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Character> Characters { get; set; }
-        public DbSet<Team> Teams { get; set; }
-        public DbSet<Move> Moves { get; set; }
-        public DbSet<Division> Divisions { get; set; }
-        public DbSet<Badge> Badges { get; set; }
-
         public GameDBContext(DbContextOptions<GameDBContext> options) : base(options)
         {
-
         }
+        public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Character> Characters { get; set; } = null!;
+        public DbSet<Team> Teams { get; set; } = null!;
+        public DbSet<Move> Moves { get; set; } = null!;
+        public DbSet<Division> Divisions { get; set; } = null!;
+        public DbSet<Badge> Badges { get; set; } = null!;
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-
             modelBuilder.Entity<User>().HasData(
                 new User { Id = 1, Name = "John" },
                 new User { Id = 2, Name = "Adam" }
@@ -29,6 +25,11 @@ namespace CIS236FinalProject.Models
                 new Division { Id = 2, Name = "Silver" },
                 new Division { Id = 3, Name = "Gold" }
                 );
+
+            modelBuilder.Entity<Team>().HasData(
+                new Team { Id = 1, Name = "Alpha Squad", UserId = 1, MaxCharacters = 4, DivisionId = 1 },
+                new Team { Id = 2, Name = "Beta Team", UserId = 2, MaxCharacters = 4, DivisionId = 2 }
+            );
 
             modelBuilder.Entity<Character>().HasData(
                 new Character { Id = 1, Name = "Warrior", Attack = 50, Defense = 40, Speed = 30, TeamId = 1},

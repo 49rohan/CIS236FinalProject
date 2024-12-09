@@ -1,5 +1,6 @@
 ﻿using CIS236FinalProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CIS236FinalProject.Controllers
 {
@@ -14,17 +15,18 @@ namespace CIS236FinalProject.Controllers
 
         public IActionResult Index()
         {
-            var leaderboard = _context.Teams.OrderByDescending(t => t.Characters.Sum(c => c.Attack))
-                .Select(t => new
-                {
-                    TeamName = t.Name,
-                    TotalAttack = t.Characters.Sum(c => c.Attack)
-                }).ToList();
-
+            var leaderboard = _context.Teams
+               .Include(t => t.Characters)
+               .OrderByDescending(t => t.Characters.Sum(c => c.Attack))
+               .Select(t => new
+               {
+                   TeamName = t.Name,
+                   TotalAttack = t.Characters.Sum(c => c.Attack)
+               }).ToList();
             ViewData["Leaderboard"] = leaderboard;
 
             return View();
-                   
+
         }
     }
 }

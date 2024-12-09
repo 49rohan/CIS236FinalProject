@@ -13,6 +13,9 @@ namespace CIS236FinalProject.Models
         public int UserId { get; set; }
         public User User { get; set; }
 
+        public int DivisionId { get; set; }
+        public Division Division { get; set; }
+
         public List<Character> Characters { get; set; } = new List<Character>();
 
     }

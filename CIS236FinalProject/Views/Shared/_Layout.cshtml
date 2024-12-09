@@ -9,8 +9,23 @@
     <link rel="stylesheet" href="~/CIS236FinalProject.styles.css" asp-append-version="true" />
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbaralert-dark bg-dark">
+        <a class="navbar-brand" href="/">Battle Stadium</a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"> <a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"> <a class="nav-link" href="/Leaderboard">Leaderboard</a></li>
+                <li class="nav-item"> <a class="nav-link" asp-area="Battle" asp-controller="Battle" asp-action="Index">Battle</a></li>
+            </ul>
+        </div>
+    </nav>
+    @if (TempData["Message"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["Message"]
+        </div>
+    }
     <div class="container">
-        <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
